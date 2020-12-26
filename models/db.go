@@ -11,7 +11,7 @@ var ormObject orm.Ormer
 // boilerplate configurations
 func ConnectToDb() {
 	orm.RegisterDriver("postgres", orm.DRPostgres)
-	orm.RegisterDataBase("default", "postgres", "user=postgres password=pgpass dbname=sampledb host=postgres_docker sslmode=disable")
+	orm.RegisterDataBase("default", "postgres", "user=postgres password=pgpass dbname=sampledb host=127.0.0.1 sslmode=disable")
 	orm.RegisterModel(new(Users))
 	ormObject = orm.NewOrm()
 }

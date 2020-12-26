@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/astaxie/beego/orm"
-	"./models"
+	"github.com/nextwebb/go-gin-pg/models"
 	"net/http"
 )
 var ORM orm.Ormer
@@ -47,7 +47,7 @@ func createUser(c *gin.Context) {
 			"user_id": newUser.UserId})
 	} else {
 		c.JSON(http.StatusInternalServerError, 
-			gin.H{"status": http.StatusInternalServerError, "error": "Failed to create the user"})
+			gin.H{"status": http.StatusInternalServerError, "error": "Failed to create the user", "message": err})
 	} 
 }
 

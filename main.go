@@ -8,8 +8,12 @@ import (
 )
 var ORM orm.Ormer
 
+//The init function executes before the main function is executed
+
 func init() {
+	// makes a new connection the DB
 	models.ConnectToDb()
+	// /gets the ORM object and stores it in the global variable ORM
 	ORM = models.GetOrmObject()
 }
 
@@ -30,6 +34,8 @@ func main() {
 }
 
 func createUser(c *gin.Context) {
+	// we are creating a variable of type user and binding that with the gin context
+	//so that we can parse the user information which we add to the body of the API request,
 	var newUser models.Users
 	c.BindJSON(&newUser)
 	_, err := ORM.Insert(&newUser)
@@ -46,7 +52,7 @@ func createUser(c *gin.Context) {
 }
 
 func readUsers(c *gin.Context) {
-	var user []models.Users
+	var user []models.Users // struct of users
 	_, err := ORM.QueryTable("users").All(&user)
 	if(err == nil) {
 		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "users": &user})

@@ -8,9 +8,10 @@ import (
 var ormObject orm.Ormer
 
 // ConnectToDb - Initializes the ORM and Connection to the postgres DB
+// boilerplate configurations
 func ConnectToDb() {
 	orm.RegisterDriver("postgres", orm.DRPostgres)
-	orm.RegisterDataBase("default", "postgres", "user=dbUser password=dbPassword dbname=dbName host=dbHost sslmode=disable")
+	orm.RegisterDataBase("default", "postgres", "user=postgres password=pgpass dbname=sampledb host=postgres_docker sslmode=disable")
 	orm.RegisterModel(new(Users))
 	ormObject = orm.NewOrm()
 }

@@ -22,10 +22,10 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
-	router.POST("/createUser", createUser)
-	router.GET("/readUsers", readUsers)
-	router.PUT("/updateUser", updateUser)
-	router.DELETE("/deleteUser", deleteUser)
+	router.POST("api/v1/users/createUser", createUser)
+	router.GET("api/v1/users/readUsers", readUsers)
+	router.PUT("api/v1/users/updateUser", updateUser)
+	router.DELETE("api/v1/users/deleteUser", deleteUser)
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.

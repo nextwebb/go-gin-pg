@@ -22,6 +22,20 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	// fix CORS error -- allow all headers
+	// gin middleware
+	router.Use(func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+		c.Next()
+	})
+
 	router.POST("api/v1/users/createUser", createUser)
 	router.GET("api/v1/users/readUsers", readUsers)
 	router.PUT("api/v1/users/updateUser", updateUser)
